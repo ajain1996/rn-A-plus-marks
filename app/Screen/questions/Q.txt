@@ -1,0 +1,117 @@
+import { View, Text, Image, StyleSheet, ImageBackground, TouchableHighlight, ScrollView } from 'react-native'
+import React from 'react'
+import CustomButton from '../../Component/CustomButton'
+import { COLORS, SIZES } from '../../Component/Constant/Color'
+import CustomHeader from '../../Component/CustomHeader'
+import { commonStyles } from '../../Utils/commonStyles'
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
+import LinearGradient from 'react-native-linear-gradient'
+
+export default function QuestionScreen({ navigation }) {
+    return (
+        <>
+            <CustomHeader navigation={navigation} title="Questions" />
+            <ScrollView style={{ width: "100%", height: "100%", backgroundColor: "#fff" }}
+                keyboardShouldPersistTaps={'always'}
+            >
+                <View style={{ marginTop: 22, paddingHorizontal: 20 }}>
+                    <Text style={{ fontSize: 22, color: COLORS.darkBlue, fontWeight: "800" }}>Best Indian</Text>
+                    <Text style={{ fontSize: 20, color: COLORS.darkBlue, fontWeight: "800" }}>Mock Test in Mumbai</Text>
+
+                    <View style={commonStyles.rowStart}>
+                        <Text style={{ ...commonStyles.fs12_500, marginTop: 8, color: COLORS.darkBlue }}>
+                            By Mika
+                        </Text>
+                        <View style={{ width: 22 }} />
+                        <Text style={{ ...commonStyles.fs12_500, marginTop: 8, color: COLORS.darkBlue }}>
+                            22. May. 2021
+                        </Text>
+                    </View>
+
+                    {
+                        [1, 2, 3, 4, 5, 6].map((data, index) => {
+                            return (
+                                <View style={[styles.premiumContentWrapper]} key={index}>
+                                    <Text style={{ ...commonStyles.fs14_500, color: COLORS.darkBlue }}>
+                                        Q{data}. You must need to purchase to continue this test.
+                                    </Text>
+                                    <View style={{ paddingHorizontal: 0, marginTop: 8 }}>
+                                        <RenderAnswer
+                                            title="A"
+                                            subText="Option 1"
+                                            onPress={() => { }}
+                                        />
+                                        <RenderAnswer
+                                            title="B"
+                                            subText="Option 2"
+                                            onPress={() => { }}
+                                        />
+                                        <RenderAnswer
+                                            title="C"
+                                            subText="Option 3"
+                                            onPress={() => { }}
+                                        />
+                                        <RenderAnswer
+                                            title="D"
+                                            subText="Option 4"
+                                            onPress={() => { }}
+                                        />
+                                    </View>
+                                </View>
+                            );
+                        })
+                    }
+                    <View style={{ height: 10 }} />
+
+                    <CustomButton
+                        text="Submit"
+                        fw="600" fs={16}
+                        textColor={COLORS.white}
+                        onPress={() => { navigation.navigate("AnswersScreen") }}
+                        buttonStyle={styles.button}
+                        underlayColor="#fff"
+                    />
+                </View>
+                <View style={{ height: 14 }} />
+            </ScrollView>
+        </>
+    )
+}
+
+const RenderAnswer = ({ title, subText, onPress }) => {
+    return (
+        <TouchableHighlight style={{ height: 42, backgroundColor: "#efefef", marginVertical: 3, justifyContent: "center", paddingHorizontal: 12, borderRadius: 3 }}
+            onPress={onPress} underlayColor="#dcdcdc"
+        >
+            <Text style={{ ...commonStyles.fs12_500, color: COLORS.darkBlue }}>
+                {title}). {subText}
+            </Text>
+        </TouchableHighlight>
+    );
+}
+
+const styles = StyleSheet.create({
+    premiumContentWrapper: {
+        width: "100%",
+        padding: 16,
+        elevation: 10,
+        shadowColor: "#999",
+        marginTop: 24,
+        backgroundColor: "#fff",
+        borderRadius: 5
+    },
+    bestValueBtn: {
+        width: 114, height: 32,
+        backgroundColor: "#fff",
+        borderRadius: 30,
+        ...commonStyles.centerStyles,
+        marginTop: 17
+    },
+    button: {
+        height: 50,
+        width: SIZES.width / 1.1,
+        backgroundColor: '#eee',
+        marginTop: 10,
+        borderRadius: 6
+    },
+})
